@@ -35,10 +35,6 @@ export class Searchbar extends React.Component {
     return (
       <header className={css.searchbar}>
         <form className={css.form} onSubmit={this.handleSubmitForm}>
-          <button type="submit" className={css.button}>
-            <span className="button-label">Search</span>
-          </button>
-
           <input
             className={css.input}
             type="text"
@@ -46,7 +42,11 @@ export class Searchbar extends React.Component {
             autoFocus
             placeholder="Search images and photos"
             onChange={this.handleSearchName}
+            value={this.state.imageName}
           />
+          <button type="submit" className={css.button}>
+            <span className="button-label">Search</span>
+          </button>
         </form>
       </header>
     );
