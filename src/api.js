@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export const fetchImagesBySearch = async ({ searchQuery, page }) => {
+export const fetchImagesBySearch = async (searchQuery, page) => {
   const BASE_URL = 'https://pixabay.com/api/';
   const API_KEY = '39941682-76fa8d5585fc0f3711900558e';
 

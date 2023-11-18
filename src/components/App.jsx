@@ -16,11 +16,15 @@ export class App extends Component {
   };
 
   handleSearchFormSubmit = imageName => {
+    if (this.state.imageNameTwoQuery === imageName) {
+      // alert
+      return;
+    }
     this.setState({ imageNameTwoQuery: imageName, page: 1, images: [] });
-    fetchImagesBySearch({
-      searchQuery: this.state.imageNameTwoQuery,
-      page: this.state.page,
-    });
+    // fetchImagesBySearch({
+    //   searchQuery: this.state.imageNameTwoQuery,
+    //   page: this.state.page,
+    // });
   };
 
   handleLoadMore = () => {
@@ -32,35 +36,34 @@ export class App extends Component {
   };
 
   async componentDidUpdate(prevProps, prevState) {
+    // деструктуризація state
     if (
       this.state.page !== prevState.page ||
       this.state.imageNameTwoQuery !== prevState.imageNameTwoQuery
     )
-      try {
-        this.setState({ loading: true });
-        // щоб очищувати стейт перед новим запитом
-        this.setState({ loading: true });
-        const imagesData = await fetchImagesBySearch({
-          searchQuery: this.state.imageNameTwoQuery,
-          page: this.state.page,
-        });
-        if (imagesData.hits.length !== 0) {
-          this.setState(prevState => ({
-            images: [...prevState.images, ...imagesData.hits],
-            // loadMore: this.state.page < Math.ceil(imagesData.totalHits / 12),
-            loadMore: prevState.page < Math.ceil(imagesData.totalHits / 12),
-          }));
-        } else if (imagesData.hits.length === 0) {
-          toast.error('No images found! Please try a different search.');
-        }
-      } catch (error) {
-        this.setState({ error: true, images: [] });
-        toast.error(
-          'Oops! Something went wrong! Please try reloading this page!'
-        );
-      } finally {
-        this.setState({ loading: false });
+      this.setState({ loading: true });
+    try {
+      const imagesData = await fetchImagesBySearch(
+        this.state.imageNameTwoQuery,
+        this.state.page
+      );
+      if (imagesData.hits.length !== 0) {
+        this.setState(prevState => ({
+          images: [...prevState.images, ...imagesData.hits],
+          loadMore: this.state.page < Math.ceil(imagesData.totalHits / 12),
+          // loadMore: prevState.page < Math.ceil(imagesData.totalHits / 12),
+        }));
+      } else if (imagesData.hits.length === 0) {
+        toast.error('No images found! Please try a different search.');
       }
+    } catch (error) {
+      this.setState({ error: true, images: [] });
+      toast.error(
+        'Oops! Something went wrong! Please try reloading this page!'
+      );
+    } finally {
+      this.setState({ loading: false });
+    }
   }
 
   render() {
