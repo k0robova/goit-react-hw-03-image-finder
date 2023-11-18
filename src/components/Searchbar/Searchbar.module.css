@@ -2,23 +2,33 @@
   background-color: #f0f0f0;
   padding: 15px;
   border-bottom: 1px solid #ccc;
+  margin-bottom: 10px;
 }
 
 .form {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 100px;
+  margin-top: 50px;
 }
 
-.button {
-  background-color: #3498db;
-  color: white;
+.button_search {
+  padding: 10px 20px;
+  font-size: 1.2em;
+  font-weight: bold;
+  text-align: center;
+  text-transform: uppercase;
   border: none;
-  margin-right: 10px;
+  border-radius: 5px;
+  background-color: #3498db;
+  color: #fff;
   cursor: pointer;
-  transition: background-color 0.3s ease;
-  padding: 15px;
+  transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.button_search:hover {
+  background-color: #0056b3;
+  transform: scale(1.05);
 }
 
 .input {

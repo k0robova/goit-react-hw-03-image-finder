@@ -1,16 +1,15 @@
-{
-  /* <ul class="gallery">
-  <!-- Набір <li> із зображеннями -->
-</ul> */
-}
+import { ImageGalleryItem } from 'components/ImageGalleryItem/ImageGalleryItem';
+import css from './ImageGallery.module.css';
 
-export const ImageGallery = ({ items }) => {
+export const ImageGallery = ({ items, onImageClick }) => {
   return (
-    <ul className="gallery">
+    <ul className={css.gallery}>
       {items.map(item => (
-        <li className="gallery-item" key={item.id}>
-          <img src={item.webformatURL} alt={item.tags} />
-        </li>
+        <ImageGalleryItem
+          key={item.id}
+          item={item}
+          onImageClick={onImageClick}
+        />
       ))}
     </ul>
   );

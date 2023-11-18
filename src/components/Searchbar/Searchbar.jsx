@@ -44,7 +44,7 @@ export class Searchbar extends React.Component {
             onChange={this.handleSearchName}
             value={this.state.imageName}
           />
-          <button type="submit" className={css.button}>
+          <button type="submit" className={css.button_search}>
             <span className="button-label">Search</span>
           </button>
         </form>
